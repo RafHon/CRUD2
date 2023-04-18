@@ -10,4 +10,5 @@ public class FilmyApplication {
 		SpringApplication.run(FilmyApplication.class, args);
 	}
 
+
 }

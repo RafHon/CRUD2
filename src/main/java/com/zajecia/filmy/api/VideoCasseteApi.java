@@ -14,39 +14,35 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/cassetes")
 public class VideoCasseteApi {
-    VideoCassetteManager videoCassetteManager;
+    private final VideoCassetteManager videoCassetteManager;
 
-    @Autowired
     public VideoCasseteApi(VideoCassetteManager videoCassetteManager) {
-        videoCassetteManager = videoCassetteManager;
+        this.videoCassetteManager = videoCassetteManager;
     }
 
     @GetMapping("/all")
-    public ArrayList<VideoCassete> getVideoCassetes() {
-        return cassetes;
+    public Iterable<VideoCassete> getVideoCassettes() {
+        return videoCassetteManager.findAll();
     }
 
     @GetMapping
-    public VideoCassete getById(@RequestParam int index) {
-        Optional<VideoCassete> first = cassetes
-                .stream()
-                .filter(element -> element.getIdentyfikator() == index)
-                .findFirst();
-        return first.get();
+    public Optional<VideoCassete> getCassetteById(@RequestParam int id) {
+        return videoCassetteManager.getVideoCassetteById((long) id);
+    }
 
-    }
     @PostMapping
-    public boolean addVideo(@RequestBody VideoCassete cassete){
-        return cassetes.add(cassete);
+    public VideoCassete addVideo(@RequestBody VideoCassete videoCassette) {
+        return videoCassetteManager.save(videoCassette);
     }
+
     @PutMapping
-    public boolean updateVideo(@RequestBody VideoCassete cassete){
-        return cassetes.add(cassete);
+    public VideoCassete updateVideo(@RequestParam int id, @RequestBody VideoCassete videoCassette) {
+        return videoCassetteManager.save(videoCassette);
     }
 
     @DeleteMapping
-    public boolean removeVideoCassete(@RequestParam int index) {
-        return cassetes.removeIf(v -> v.getIdentyfikator() == index);
+    public void deleteVideo(@RequestParam int id) {
+        videoCassetteManager.deleteById((long)id);
     }
 
 }

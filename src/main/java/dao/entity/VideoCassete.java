@@ -10,40 +10,41 @@ import java.time.LocalDate;
 public class VideoCassete {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long identyfikator;
-    private String tytul;
-    public LocalDate rokProdukcji;
+    private Long id;
+    private String title;
+    private LocalDate productionYear;
 
-    public long getIdentyfikator() {
-        return identyfikator;
-    }
-
-    public void setIdentyfikator(long identyfikator) {
-        this.identyfikator = identyfikator;
-    }
-
-    public String getTytul() {
-        return tytul;
-    }
-
-    public void setTytul(String tytul) {
-        this.tytul = tytul;
-    }
-
-    public LocalDate getRokProdukcji() {
-        return rokProdukcji;
-    }
-
-    public void setRokProdukcji(LocalDate rokProdukcji) {
-        this.rokProdukcji = rokProdukcji;
-    }
-
-    public VideoCassete(long identyfikator, String tytul, LocalDate rokProdukcji) {
-        this.identyfikator = identyfikator;
-        this.tytul = tytul;
-        this.rokProdukcji = rokProdukcji;
+    public VideoCassete(Long id, String title, LocalDate productionYear) {
+        this.id = id;
+        this.title = title;
+        this.productionYear = productionYear;
     }
 
     public VideoCassete() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDate getProductionYear() {
+        return productionYear;
+    }
+
+    public void setProductionYear(LocalDate productionYear) {
+        this.productionYear = productionYear;
     }
 }

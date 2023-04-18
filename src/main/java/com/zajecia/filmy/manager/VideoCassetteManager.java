@@ -12,32 +12,33 @@ import java.util.Optional;
 
 @Service
 public class VideoCassetteManager {
-    private VideoCasseteRepo videoCasseteRepo;
+    private final VideoCasseteRepo videoCassetteRepo;
 
     @Autowired
-    public VideoCassetteManager(VideoCasseteRepo videoCasseteRepo) {
-        this.videoCasseteRepo = videoCasseteRepo;
+    public VideoCassetteManager(VideoCasseteRepo videoCassetteRepo) {
+        this.videoCassetteRepo = videoCassetteRepo;
     }
 
-    public Optional<VideoCassete> findAllById(long id) {
-        return videoCasseteRepo.findById(id);
+    public Optional<VideoCassete> getVideoCassetteById(Long id) {
+        return videoCassetteRepo.findById(id);
     }
 
     public Iterable<VideoCassete> findAll() {
-        return videoCasseteRepo.findAll();
+        return videoCassetteRepo.findAll();
     }
 
-    public VideoCassete save(VideoCassete videoCassete) {
-        return (VideoCassete) videoCasseteRepo.save(videoCassete);
+    public VideoCassete save(VideoCassete videoCassette) {
+        return (VideoCassete) videoCassetteRepo.save(videoCassette);
     }
 
-    public void delete(long id) {
-        videoCasseteRepo.deleteById(id);
+    public void deleteById(Long id) {
+        videoCassetteRepo.deleteById(id);
     }
-
     @EventListener(ApplicationReadyEvent.class)
     public void fillDb(){
-        save(new VideoCassete(4,"tytul44", LocalDate.of(2000,1,1)));
-        save(new VideoCassete(5,"tytul55", LocalDate.of(2000,1,1)));
+        save(new VideoCassete(1L, "The Shawshank Redemption", LocalDate.of(1994, 9, 14)));
+        save(new VideoCassete(2L, "The Godfather", LocalDate.of(1972, 3, 24)));
+        save(new VideoCassete(3L, "The Dark Knight", LocalDate.of(2008, 7, 14)));
+
     }
 }
